@@ -1,0 +1,22 @@
+{
+  "name": "Learn Something!",
+  "exercises": [{
+      "task": "type something",
+      "correct": "abc",
+      "hangul": "\u3145",
+      "answeredCorrectly": 0
+    },
+    {
+      "task": "type one",
+      "correct": "one",
+      "hangul": "\u3144",
+      "answeredCorrectly": 0
+    },
+    {
+      "task": "type thrice",
+      "correct": "3",
+      "hangul": "\u3155",
+      "answeredCorrectly": 0
+    },
+  ]
+}

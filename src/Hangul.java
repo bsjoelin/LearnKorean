@@ -1,25 +1,20 @@
 import processing.data.*;
-import java.io.*;
 
 public class Hangul {
-	JSONArray hangulChars;
+	private JSONArray hangulChars;
 	private StringDict hangulLatinPairs;
 
 	public void loadData(String filepath) {
-		File JSONfile = new File(filepath);
-		Reader r;
-		try {
-			r = new FileReader(JSONfile);
-			this.hangulChars = new JSONArray(r);
-			r.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("Filepath doesn't contain JSON file.");
-		} catch (IOException e) {
-			System.out.println("File couldn't close.");
-		}
-
-		//Create the latin - hangul pairs
+		this.hangulChars = DataHandler.loadDataToJSONArray(filepath);
 		this.hangulLatinPairs = createHashTable(this.hangulChars);
+	}
+	
+	private StringDict createHashTable(JSONArray JArray) {
+		StringDict dict = new StringDict();
+		for(int i = 0; i < JArray.size(); i++) {
+			dict.set(JArray.getJSONObject(i).getString("latin"), JArray.getJSONObject(i).getString("unicode"));
+		}
+		return dict;
 	}
 	
 	private String getHangulUnicode(String s) {
@@ -29,10 +24,10 @@ public class Hangul {
 	public String convertToHangul(String latin) {
 		char[] chars = latin.toCharArray();
 		StringBuilder sb = new StringBuilder(7*latin.length());
-		
+
 		for(int i = 0; i < latin.length(); i++) {
 			char c = chars[i];
-			
+
 			// Make sure, that "ss" and "jj" are translated correctly
 			if(i+1 < latin.length()) {
 				if(c =='s') {
@@ -49,19 +44,10 @@ public class Hangul {
 					}
 				}
 			}
-			
+
 			sb.append(getHangulUnicode(new Character(c).toString()));
-			
+
 		}
 		return sb.toString();
 	}
-
-	private StringDict createHashTable(JSONArray JArray) {
-		StringDict dict = new StringDict();
-		for(int i = 0; i < JArray.size(); i++) {
-			dict.set(JArray.getJSONObject(i).getString("latin"), JArray.getJSONObject(i).getString("unicode"));
-		}
-		return dict;
-	}
-
 }
