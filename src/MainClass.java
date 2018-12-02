@@ -6,6 +6,7 @@ public class MainClass extends PApplet{
 	String hangulJSON = "data\\hangul.json";
 	Hangul hangul = new Hangul();
 	Lessons lessons;
+	Scene currentScene;
 
 	public static void main(String[] args) {
 		PApplet.main("MainClass");
@@ -17,8 +18,7 @@ public class MainClass extends PApplet{
 	}
 
 	public void setup() {
-		b = new Button(this, 50, 50, 20, 20, "Hey");
-		b.setColor(255, 255, 255);
+		currentScene = new SceneManager.MainMenu(this);
 		hangul.loadData(hangulJSON);
 		lessons = new Lessons("data\\lessons.json");
 		textFont(createFont("malgun gothic",24));
@@ -26,8 +26,14 @@ public class MainClass extends PApplet{
 	}
 
 	public void draw() {
-		b.display();
+		background(0);
+		currentScene.display();
+		
 		fill(0);
 		text(hangul.convertToHangul("ss"),15,15);
+	}
+	
+	public void mousePressed() {
+		
 	}
 }

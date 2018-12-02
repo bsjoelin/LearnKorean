@@ -48,10 +48,11 @@ public class Lessons {
 				String task = entry.getString("task");
 				String correct = entry.getString("correct");
 				String hangul = entry.getString("hangul");
+				int answered = entry.getInt("answered");
 				int answeredCor = entry.getInt("answeredCorrectly");
 				
 				// Initiate the current exercise and add it to the list.
-				Exercise e = new Exercise(task, correct, hangul, answeredCor);
+				Exercise e = new Exercise(task, correct, hangul, answered, answeredCor);
 				exercises.add(e);
 			}
 		}
@@ -68,16 +69,40 @@ public class Lessons {
 
 
 		public class Exercise {
-			String task;
-			String correctAnswer;
-			String hangulText;
-			int answeredCorrectly;
-
-			Exercise(String t, String cor, String han, int ansCor){
+			private String task;
+			private String hangulText;
+			private String correctAnswer;
+			private int timesAnswered;
+			private int timesAnsweredCorrectly;
+			
+			// Normal constructor to populate variables.
+			Exercise(String t, String cor, String han, int ans, int ansCor){
 				this.task = t;
 				this.correctAnswer = cor;
 				this.hangulText = han;
-				this.answeredCorrectly = ansCor;
+				this.timesAnswered = ans;
+				this.timesAnsweredCorrectly = ansCor;
+			}
+			
+			// Function to check whether a given answer is correct. Updates answer-count.
+			public boolean isCorrect(String input) {
+				if(input.toLowerCase().equals(this.correctAnswer)) {
+					this.timesAnswered++;
+					this.timesAnsweredCorrectly++;
+					return true;
+				}
+				this.timesAnswered++;
+				return false;
+			}
+			
+			// Getter for the task text and optional hangul characters. Returns as a string array.
+			public String[] getTask() {
+				return new String[] {this.task,this.hangulText};
+			}
+			
+			// Getter to determine how often (in percent) an exercise has been answered correctly.
+			public float getCorrectness() {
+				return (float)this.timesAnsweredCorrectly/this.timesAnswered;
 			}
 
 		}

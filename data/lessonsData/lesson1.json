@@ -4,18 +4,21 @@
       "task": "type something",
       "correct": "abc",
       "hangul": "\u3145",
+      "answered":0,
       "answeredCorrectly": 0
     },
     {
       "task": "type one",
       "correct": "one",
       "hangul": "\u3144",
+      "answered":0,
       "answeredCorrectly": 0
     },
     {
       "task": "type thrice",
       "correct": "3",
       "hangul": "\u3155",
+      "answered":0,
       "answeredCorrectly": 0
     },
   ]

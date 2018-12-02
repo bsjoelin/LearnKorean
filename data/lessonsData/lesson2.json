@@ -4,18 +4,21 @@
       "task": "type me",
       "correct": "me",
       "hangul": "\u3139",
+      "answered":0,
       "answeredCorrectly": 0
     },
     {
       "task": "type a",
       "correct": "a",
       "hangul": "\u3150",
+      "answered":0,
       "answeredCorrectly": 0
     },
     {
       "task": "type dice",
       "correct": "dice",
       "hangul": "\u3143",
+      "answered":0,
       "answeredCorrectly": 0
     },
   ]
